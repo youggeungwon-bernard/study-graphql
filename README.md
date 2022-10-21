@@ -1,12 +1,22 @@
 # GraphQL 스터디
 
-## 설정
+## 환경구성
+
+- apollo(graphql)
+- prisma
+- postgresql
+
+## 프로젝트 초기 세팅
+
+1. 인스톨
 
 ```shell
-yarn dlx prisma init
+yarn install
 ```
 
-## 도커
+2. 도커 Postgresql DB 세팅
+
+도커 컨테이너 생성 후 DB 접속
 
 ```shell
 docker pull postgres
@@ -23,19 +33,26 @@ docker run \
 docker exec --user="root" -it ohou-postgres "bash"
 ```
 
-postgresql
+데이터베이스 생성
+
+```sql
+CREATE DATABASE graphql;
+```
+
+3. 테이블 생성
+
+`prisma schema` 로 테이블을 생성하고, `/prisma/seed.ts` 파일을 실행하여, 초기 데이터를 생성합니다.
 
 ```shell
-psql -U postgres
-SELECT datname FROM pg_database; -- 전체 데이터베이스 이름 출력
-SELECT datname FROM pg_database WHERE datistemplate = false; -- 사용자가 생성한 데이터베이스 이름만 출력
+yarn generate
+```
 
-CREATE DATABASE graphql;
-\c graphql; -- 데이터베이스 변경
+4. 서버 실행
 
-SELECT * FROM PG_TABLES; -- PostgreSQL 내 모든 테이블 이름 조회
-SELECT * FROM PG_TABLES WHERE schemaname='public'; -- 사용자가 생성한 테이블 이름 조회
-SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name; -- 사용자가 생성한 테이블의 이름 정보만 조회
+`yarn dev` 명령어로 개발 서버를 실행합니다.
+
+```shell
+yarn dev
 ```
 
 ## 참조
