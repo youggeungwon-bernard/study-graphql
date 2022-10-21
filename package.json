@@ -1,0 +1,29 @@
+{
+  "name": "study-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/server",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server",
+    "generate": "prisma migrate dev --name init",
+    "studio": "prisma studio"
+  },
+  "packageManager": "yarn@3.2.4",
+  "dependencies": {
+    "@graphql-tools/schema": "^9.0.4",
+    "@prisma/client": "4.5.0",
+    "apollo-server": "^3.10.3",
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.3",
+    "prisma": "4.5.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
+}
